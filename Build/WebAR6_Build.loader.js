@@ -50,7 +50,7 @@ function createUnityInstance(canvas, config, onProgress = () => { }) {
       preserveDrawingBuffer: false,
       powerPreference: 2,
     },
-    wasmFileSize: 46436864,
+    wasmFileSize: 48135059,
     streamingAssetsUrl: "StreamingAssets",
     downloadProgress: {},
     onProgress,
@@ -888,6 +888,8 @@ Module.fetchWithProgress = function () {
       reject(msg);
     } else if (!Module.SystemInfo.hasWasm) {
       reject("Your browser does not support WebAssembly.");
+    } else if (!Module.SystemInfo.hasWasm2023) {
+      reject("Your browser does not support WebAssembly 2023. Please update to Chrome ≥ 91 (May 2021), Firefox ≥ 89 (June 2021) or Safari ≥ 16.4 (March 2023). (failed " + Module.SystemInfo.missingWasm2023Feature + ")");
     } else {
       Module.startupErrorHandler = reject;
       onProgress(0);
